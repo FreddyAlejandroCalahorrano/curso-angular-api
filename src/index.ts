@@ -1,12 +1,14 @@
 import "reflect-metadata";
 import {createExpressServer} from 'routing-controllers';
 import {CatalogoControllers} from "./Controllers/CatalogoControllers";
+import { ContactsControllers } from "./Controllers/ContactsController";
 
 // creates express app, registers all controller routes and returns you express app instance
 const app = createExpressServer({
     cors: true,
     controllers: [
         CatalogoControllers,
+        ContactsControllers
     ], // we specify controllers we want to use
 });
 
