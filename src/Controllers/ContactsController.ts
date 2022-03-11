@@ -1,4 +1,4 @@
-import {Post, Get, JsonController, Body} from "routing-controllers";
+import {Post, Get, JsonController, Body, QueryParam} from "routing-controllers";
 import {newUID} from "../Utils/util";
 
 @JsonController('/contacts/')
@@ -8,9 +8,7 @@ export class ContactsControllers {
         {
             id: 1,
             firstName: "Freddy",
-            secondName: "Alejandro",
             lastName: "Calahorrano",
-            secondLastName: "Rivera",
             email: "fredd-1333@hotmail.com",
             bank: "Pichincha",
             acountType: "Ahorros",
@@ -19,9 +17,7 @@ export class ContactsControllers {
         {
             id: 2,
             firstName: "Samir",
-            secondName: "Alejandro",
             lastName: "Calahorrano",
-            secondLastName: "Rivera",
             email: "sami-1333@hotmail.com",
             bank: "Pichincha",
             acountType: "Ahorros",
@@ -31,6 +27,12 @@ export class ContactsControllers {
 
     @Get('')
     getIndex() {
+        return [...this.listContacts]
+    }
+
+    @Get('contact')
+    getList(@QueryParam('id') id: number) {
+        if(id) return this.listContacts.filter(item => item.id == id)
         return [...this.listContacts]
     }
 

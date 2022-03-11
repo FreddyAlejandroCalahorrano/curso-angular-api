@@ -1,3 +1,4 @@
+import { TransControllers } from './Controllers/TransController';
 import "reflect-metadata";
 import {createExpressServer} from 'routing-controllers';
 import {CatalogoControllers} from "./Controllers/CatalogoControllers";
@@ -8,7 +9,8 @@ const app = createExpressServer({
     cors: true,
     controllers: [
         CatalogoControllers,
-        ContactsControllers
+        ContactsControllers,
+        TransControllers
     ], // we specify controllers we want to use
 });
 

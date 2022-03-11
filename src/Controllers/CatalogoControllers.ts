@@ -1,7 +1,7 @@
-import {Post, Get, JsonController, Body} from "routing-controllers";
+import {Post, Get, JsonController, Body, QueryParam} from "routing-controllers";
 import {newUID} from "../Utils/util";
 
-@JsonController('/catalogo/')
+@JsonController('/cuentas/')
 export class CatalogoControllers {
 
     listItems: any[] = [
@@ -15,27 +15,31 @@ export class CatalogoControllers {
     listTipoCuenta: any[] = [
         {
             id: "ou5l8mchp3s",
-            Descripcion: "Cuenta Ahorro"
+            Descripcion: "Cuenta Ahorro",
+            TipoCuenta: 'NT'
         },
         {
             id: "1bxgrnux5m4",
-            Descripcion: "Cuenta Corriente"
+            Descripcion: "Cuenta Corriente",
+            TipoCuenta: 'NT'
         },
         {
             id: "av23eu4plma",
-            Descripcion: "Cuenta Ahorro Futuro"
+            Descripcion: "Cuenta Ahorro Futuro",
+            TipoCuenta: 'EP'
         }
     ]
     //#endregion
 
     @Get('')
     getIndex() {
-        return 'Working!!.'
+        return [...this.listTipoCuenta]
     }
 
-    @Get('list')
-    getList() {
-        return [...this.listItems]
+    @Get('tipo-cuenta')
+    getList(@QueryParam('tipo') tipo: string) {
+        if(tipo) return this.listTipoCuenta.filter(item => item.TipoCuenta == tipo)
+        return [...this.listTipoCuenta]
     }
 
     @Post('')
